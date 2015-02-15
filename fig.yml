@@ -7,9 +7,9 @@ workspace:
 db:
   image: tutum/mariadb
   environment:
-   - MARIADB_PASS=sansheng20150214 
+   - MARIADB_PASS=123456 
   volumes:
-   - /database:/var/lib/mysql
+   - /codeEnv/database:/var/lib/mysql
 memcache: 
   image: memcached
 socketlog:
@@ -26,57 +26,12 @@ phpmyadmin:
    - memcache
   environment:
    - VIRTUAL_HOST=phpmyadmin.i.shequnnet.com
-luofeiweixin:
+usernamewww:
   build: ./runbox
   volumes:
-   - /code/luofei.weixin:/app
+   - /codeEnv/code/username.www:/app
   links:
    - db
    - memcache
   environment:
-   - VIRTUAL_HOST=luofei.weixin.i.shequnnet.com
-cqweixin:
-  build: ./runbox
-  volumes:
-   - /code/cq.weixin:/app
-  links:
-   - db
-   - memcache
-  environment:
-   - VIRTUAL_HOST=cq.weixin.i.shequnnet.com
-whjweixin:
-  build: ./runbox
-  volumes:
-   - /code/whj.weixin:/app
-  links:
-   - db
-   - memcache
-  environment:
-   - VIRTUAL_HOST=whj.weixin.i.shequnnet.com
-luofeiapi:
-  build: ./runbox
-  volumes:
-   - /code/luofei.api:/app
-  links:
-   - db
-   - memcache
-  environment:
-   - VIRTUAL_HOST=luofei.api.i.shequnnet.com
-cqapi:
-  build: ./runbox
-  volumes:
-   - /code/cq.api:/app
-  links:
-   - db
-   - memcache
-  environment:
-   - VIRTUAL_HOST=cq.api.i.shequnnet.com
-whjapi:
-  build: ./runbox
-  volumes:
-   - /code/whj.api:/app
-  links:
-   - db
-   - memcache
-  environment:
-   - VIRTUAL_HOST=whj.api.i.shequnnet.com
+   - VIRTUAL_HOST=username.www.test.com

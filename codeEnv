@@ -33,4 +33,5 @@ if [ -z $(which fig) ]; then
 fi
 cd /codeEnv
 sudo  docker run --name nginx -d -p 80:80 -v /var/run/docker.sock:/tmp/docker.sock -t jwilder/nginx-proxy
-sudo fig up -d
+#fig 命令不用sudo， 如果sudo了没有环境变量
+fig up -d
