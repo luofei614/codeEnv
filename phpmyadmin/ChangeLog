@@ -1,0 +1,80 @@
+phpMyAdmin - ChangeLog
+======================
+
+4.3.9.0 (2015-02-05)
+- bug #4728 Incorrect headings in routine editor
+- bug #4730 Notice while browsing tables when phpmyadmin pma database exists, but not all the tables
+- bug #4729 Display original field when using "Relational display column" option and display column is empty
+- bug #4734 Default values for binary fields do not support binary values
+- bug #4736 Changing display options breaks query highlighting
+- bug       Undefined index submit_type
+- bug #4738 Header lose align when scrolling in Firefox
+- bug #4741 in ./libraries/Advisor.class.php#184 vsprintf(): Too few arguments
+- bug #4743 Unable to move cursor with keyboard in filter rows box
+- bug       Incorrect link in doc
+- bug #4745 Tracking does not handle views properly
+- bug #4706 Schema export doesn't handle dots in db/table name
+- bug #3935 Table Header not displayed correct (Safari 5.0.5 Mac)
+- bug #4750 Disable renaming referenced columns
+- bug #4748 Column name center-aligned instead of left-aligned in Relations
+
+4.3.8.0 (2015-01-24)
+- bug       Undefined constant PMA_DRIZZLE
+- bug #4712 Wrongly positioned date-picker while Grid-Editing
+- bug #4714 Forced ORDER BY for own sql statements
+- bug #4721 Undefined property: stdClass::$version
+- bug #4719 'only_db' not working
+- bug #4700 Error text: Internal Server Error
+- bug #4722 Incorrect width table summary when favorite tables is disabled
+- bug #4710 Nav tree error after filtering the tables
+- bug #4716 Collapse all in navigation panel is sometimes broken
+- bug #4724 Cannot navigate in filtered table list
+- bug #4717 Database navigation menu broken when resolution/screen is changing
+- bug #4727 Collation column missing in database list when DisableIS is true
+- bug       Undefined index central_columnswork
+- bug       Undefined index favorite_tables 
+
+4.3.7.0 (2015-01-15)
+- bug #4694 js error on marking table as favorite in Safari (in private mode)
+- bug #4695 Changing $cfg['DefaultTabTable'] doesn't update link and title
+- bug       Undefined index menuswork
+- bug       Undefined index navwork
+- bug       Undefined index central_columnswork
+- bug #4697 Server Status refresh not behaving as expected
+- bug       Null argument in array_multisort()
+- bug #4699 Navigation panel should not hide icons based on 'TableNavigationLinksMode'
+- bug #4703 Unsaved schema page exported as pdf.pdf
+- bug #4707 Call to undefined method PMA_Schema_PDF::dieSchema()
+- bug #4702 URL is non RFC-2396 compatible in get_scripts.js.php
+
+4.3.6.0 (2015-01-07)
+- bug       Undefined index notices while configuring recent and favorite tables
+- bug #4687 Designer breaks without configuration storage
+- bug #4686 Select elements flicker and selects something else
+- bug #4689 Setup tool creates "pma__favorites" incorrectly
+- bug #4685 Call to a member function isUserType() on a non-object
+- bug #4691 Do not include console when no server is selected
+- bug #4688 File permissions in archive
+- bug #4692 Dynamic javascripts gives 500 when db selected
+
+4.3.5.0 (2015-01-05)
+- bug       Auto-configuration: tables were not created automatically
+- bug #4677 Advanced feature checker does not check for favorite tables feature
+- bug #4678 Some of the data stored in configuration storage are not deleted upon db or table delete
+- bug #4679 Setup does not allow providing a name for favorites table
+- bug #4680 Number of favorite table are not configurable in setup
+- bug #4681 'Central columns table' field in setup does not have a description
+- bug #4318 Default connection collation and sorting
+- bug #4683 Relational data is not properly updated on table rename
+- bug #4655 Undefined index: collation_connection (second patch)
+- bug #4682 4.3.3 & 4.3.4 Import sql created by mysqldump fails on foreign keys
+- bug #4676 Auto-configuration issues
+- bug #4416 New lines are removed when grid editing (part two: TEXT)
+
+         --- Older ChangeLogs can be found on our project website ---
+                     http://www.phpmyadmin.net/old-stuff/ChangeLogs/
+
+# vim: et ts=4 sw=4 sts=4
+# vim: ft=changelog fenc=utf-8
+# vim: fde=getline(v\:lnum-1)=~'^\\s*$'&&getline(v\:lnum)=~'\\S'?'>1'\:1&&v\:lnum>4&&getline(v\:lnum)!~'^#'
+# vim: fdn=1 fdm=expr
