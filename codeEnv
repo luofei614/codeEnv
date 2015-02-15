@@ -20,7 +20,6 @@ if [ -z $(which docker) ]; then
    #使用fig需要设置docker的DOCKER_OPTS
    sudo  echo 'DOCKER_OPTS="-H tcp://127.0.0.1:4243 -H unix:///var/run/docker.sock"' >> /etc/default/docker
    sudo restart docker
-   export DOCKER_HOST=tcp://localhost:4243
    echo "export DOCKER_HOST=tcp://localhost:4243" >> ~/.bashrc
 fi
 if [ -z $(which fig) ]; then
@@ -28,10 +27,11 @@ if [ -z $(which fig) ]; then
    sudo wget -O /usr/local/bin/fig https://github.com/docker/fig/releases/download/1.0.1/fig-`uname -s`-`uname -m`
    sudo chmod +x /usr/local/bin/fig
    #fig 的镜像名称不能有大写字母，所以这里指定镜像名称前缀为code
-   export FIG_PROJECT_NAME=code
    echo "export FIG_PROJECT_NAME=code" >> ~/.bashrc
 fi
 cd /codeEnv
 sudo  docker run --name nginx -d -p 80:80 -v /var/run/docker.sock:/tmp/docker.sock -t jwilder/nginx-proxy
 #fig 命令不用sudo， 如果sudo了没有环境变量
+export DOCKER_HOST=tcp://localhost:4243
+export FIG_PROJECT_NAME=code
 fig up -d
