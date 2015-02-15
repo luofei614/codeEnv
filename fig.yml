@@ -1,3 +1,8 @@
+workspace:
+  build:./workspace
+  ports:"222:22"
+  volumes:
+   - /codeEnv/code:/code
 db:
   image: tutum/mariadb
   environment:
