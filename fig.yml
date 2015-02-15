@@ -1,6 +1,7 @@
 workspace:
-  build:./workspace
-  ports:"222:22"
+  build: ./workspace
+  ports:
+   - "222:22"
   volumes:
    - /codeEnv/code:/code
 db:
