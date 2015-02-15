@@ -1,5 +1,5 @@
 FROM ubuntu:12.04
-ADD sources.list /etc/apt/sources.list
+#ADD sources.list /etc/apt/sources.list
 RUN apt-get update && \
     apt-get -yq install \
         curl \
