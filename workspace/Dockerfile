@@ -11,7 +11,9 @@ RUN apt-get update && apt-get install -y openssh-server zip
 RUN  mkdir /var/run/sshd && chmod 0755 /var/run/sshd
 #这里添加的目录会在docker run 指定 v 参数覆盖，所以无用
 ADD  www /app
+ADD  run.sh /run.sh
+RUN  chmod +x /run.sh
 RUN  cd /app && ssh-keygen -N "" -t dsa -b 1024 -f rsync-key && cp rsync-key.pub /var/www/.ssh/authorized_keys  && zip -r code.zip *
 EXPOSE 22
 VOLUME ["/code"]
-CMD   chown -R www-data:www-data /code && /usr/sbin/sshd -D & && /run.sh 
+CMD   /run.sh 
