@@ -19,13 +19,15 @@ install()
     if [ -z $(which docker) ]; then
        echo "install docker ..."
        curl -sSL https://get.docker.com | sudo sh
+       #启动docker的后台进程
+       sudo docker -d &
        #使用fig需要设置docker的DOCKER_OPTS
        #  >> 符合不能用root用户修改文件
        #sudo  echo 'DOCKER_OPTS="-H tcp://127.0.0.1:4243 -H unix:///var/run/docker.sock"' >> /etc/default/docker
        #sudo sed -i '$s/$/\nDOCKER_OPTS="-H tcp:\/\/127\.0\.0\.1:4243 -H unix:\/\/\/var\/run\/docker.\sock"/' /etc/default/docker
-       sudo sh -c  "echo 'DOCKER_OPTS=\"-H tcp://127.0.0.1:4243 -H unix:///var/run/docker.sock\"' >> /etc/default/docker"
+       #sudo sh -c  "echo 'DOCKER_OPTS=\"-H tcp://127.0.0.1:4243 -H unix:///var/run/docker.sock\"' >> /etc/default/docker"
        #sudo restart docker
-       echo "export DOCKER_HOST=tcp://localhost:4243" >> ~/.bashrc
+       #echo "export DOCKER_HOST=tcp://localhost:4243" >> ~/.bashrc
     fi
     if [ -z $(which fig) ]; then
        echo "install fig ..."
@@ -42,19 +44,19 @@ start()
 {
     sudo  docker run --name nginx -d -p 80:80 -v /var/run/docker.sock:/tmp/docker.sock -t jwilder/nginx-proxy
     #fig 命令不用sudo， 如果sudo了没有环境变量
-    export DOCKER_HOST=tcp://localhost:4243
+    #export DOCKER_HOST=tcp://localhost:4243
     export FIG_PROJECT_NAME=code
-    fig up -d
+    sudo fig up -d
 }
 
 stop()
 {
     sudo docker rm -f nginx
-    fig stop
+    sudo fig stop
 }
 rebuild()
 {
-    fig build
+    sudo fig build
 }
 
 cd /codeEnv
