@@ -5,9 +5,9 @@ install()
      if [ -z $(which git) ]; then
       echo "install git ..."
       if [ ! -z $(which apt-get) ]; then
-        sudo apt-get update && apt-get install -yq git
+        sudo apt-get update && sudo  apt-get install -yq git
       elif [ ! -z $(which yum) ]; then
-        sudo yum update && yum -y install git
+        sudo yum update && sudo  yum -y install git
       else
          echo "can not install git"
          exit 1
