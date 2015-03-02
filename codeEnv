@@ -20,8 +20,11 @@ install()
        echo "install docker ..."
        curl -sSL https://get.docker.com | sudo sh
        #使用fig需要设置docker的DOCKER_OPTS
-       sudo  echo 'DOCKER_OPTS="-H tcp://127.0.0.1:4243 -H unix:///var/run/docker.sock"' >> /etc/default/docker
-       sudo restart docker
+       #  >> 符合不能用root用户修改文件
+       #sudo  echo 'DOCKER_OPTS="-H tcp://127.0.0.1:4243 -H unix:///var/run/docker.sock"' >> /etc/default/docker
+       #sudo sed -i '$s/$/\nDOCKER_OPTS="-H tcp:\/\/127\.0\.0\.1:4243 -H unix:\/\/\/var\/run\/docker.\sock"/' /etc/default/docker
+       sudo sh -c  "echo 'DOCKER_OPTS=\"-H tcp://127.0.0.1:4243 -H unix:///var/run/docker.sock\"' >> /etc/default/docker"
+       #sudo restart docker
        echo "export DOCKER_HOST=tcp://localhost:4243" >> ~/.bashrc
     fi
     if [ -z $(which fig) ]; then
