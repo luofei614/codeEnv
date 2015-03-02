@@ -7,7 +7,7 @@ RUN sed -i "s/archive\.ubuntu\.com/mirrors\.163\.com/g" /etc/apt/sources.list
 #设置www-data用户可以登录
 RUN sed -i "s/\/var\/www:\/usr\/sbin\/nologin/\/var\/www:\/bin\/bash/" /etc/passwd
 #设置ssh，本地生产key，环境变量填写key
-RUN apt-get update && apt-get install -y openssh-server zip
+RUN apt-get update && apt-get install -y openssh-server zip rsync
 RUN  mkdir /var/run/sshd && chmod 0755 /var/run/sshd
 #这里添加的目录会在docker run 指定 v 参数覆盖，所以无用
 ADD  www /app
