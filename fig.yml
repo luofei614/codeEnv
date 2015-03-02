@@ -4,6 +4,8 @@ workspace:
    - "222:22"
   volumes:
    - /codeEnv/code:/code
+  environment:
+   - VIRTUAL_HOST=code.env.com
 db:
   image: tutum/mariadb
   environment:
@@ -25,7 +27,7 @@ phpmyadmin:
    - db
    - memcache
   environment:
-   - VIRTUAL_HOST=phpmyadmin.i.shequnnet.com
+   - VIRTUAL_HOST=phpmyadmin.env.com
 usernamewww:
   build: ./runbox
   volumes:
@@ -34,4 +36,4 @@ usernamewww:
    - db
    - memcache
   environment:
-   - VIRTUAL_HOST=username.www.test.com
+   - VIRTUAL_HOST=username.www.env.com

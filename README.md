@@ -1,2 +1,3 @@
 # codeEnv
-TODO ， 代码同步的代码通过zip命令压缩， 然后用户可以用scp下载到本地
+install :
+wget -O /usr/local/bin/codeEnv https://raw.githubusercontent.com/luofei614/codeEnv/master/codeEnv ; chmod +x /usr/local/bin/codeEnv ; /usr/local/bin/codeEnv install 

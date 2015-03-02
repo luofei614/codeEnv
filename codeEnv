@@ -1,37 +1,85 @@
 #!/bin/sh
-if [ ! -d /codeEnv ]; then
- if [ -z $(which git) ]; then
-  echo "install git ..."
-  if [ ! -z $(which apt-get) ]; then
-    sudo apt-get update && apt-get install -yq git
-  elif [ ! -z $(which yum) ]; then
-    sudo yum update && yum -y install git
-  else
-     echo "can not install git"
-     exit 1
-  fi
- fi
-   #clone 代码
-   sudo git clone https://github.com/luofei614/codeEnv.git /codeEnv
-fi
-if [ -z $(which docker) ]; then
-   echo "install docker ..."
-   curl -sSL https://get.docker.com | sudo sh
-   #使用fig需要设置docker的DOCKER_OPTS
-   sudo  echo 'DOCKER_OPTS="-H tcp://127.0.0.1:4243 -H unix:///var/run/docker.sock"' >> /etc/default/docker
-   sudo restart docker
-   echo "export DOCKER_HOST=tcp://localhost:4243" >> ~/.bashrc
-fi
-if [ -z $(which fig) ]; then
-   echo "install fig ..."
-   sudo wget -O /usr/local/bin/fig https://github.com/docker/fig/releases/download/1.0.1/fig-`uname -s`-`uname -m`
-   sudo chmod +x /usr/local/bin/fig
-   #fig 的镜像名称不能有大写字母，所以这里指定镜像名称前缀为code
-   echo "export FIG_PROJECT_NAME=code" >> ~/.bashrc
-fi
+install()
+{
+    if [ ! -d /codeEnv ]; then
+     if [ -z $(which git) ]; then
+      echo "install git ..."
+      if [ ! -z $(which apt-get) ]; then
+        sudo apt-get update && apt-get install -yq git
+      elif [ ! -z $(which yum) ]; then
+        sudo yum update && yum -y install git
+      else
+         echo "can not install git"
+         exit 1
+      fi
+     fi
+       #clone 代码
+       sudo git clone https://github.com/luofei614/codeEnv.git /codeEnv
+    fi
+    if [ -z $(which docker) ]; then
+       echo "install docker ..."
+       curl -sSL https://get.docker.com | sudo sh
+       #使用fig需要设置docker的DOCKER_OPTS
+       sudo  echo 'DOCKER_OPTS="-H tcp://127.0.0.1:4243 -H unix:///var/run/docker.sock"' >> /etc/default/docker
+       sudo restart docker
+       echo "export DOCKER_HOST=tcp://localhost:4243" >> ~/.bashrc
+    fi
+    if [ -z $(which fig) ]; then
+       echo "install fig ..."
+       sudo wget -O /usr/local/bin/fig https://github.com/docker/fig/releases/download/1.0.1/fig-`uname -s`-`uname -m`
+       sudo chmod +x /usr/local/bin/fig
+       #fig 的镜像名称不能有大写字母，所以这里指定镜像名称前缀为code
+       echo "export FIG_PROJECT_NAME=code" >> ~/.bashrc
+    fi
+    echo "install success"
+    echo "download file:http://code.env.com/code.zip"
+}
+
+start()
+{
+    sudo  docker run --name nginx -d -p 80:80 -v /var/run/docker.sock:/tmp/docker.sock -t jwilder/nginx-proxy
+    #fig 命令不用sudo， 如果sudo了没有环境变量
+    export DOCKER_HOST=tcp://localhost:4243
+    export FIG_PROJECT_NAME=code
+    fig up -d
+}
+
+stop()
+{
+    sudo docker rm -f nginx
+    fig stop
+}
+rebuild()
+{
+    fig build
+}
+
 cd /codeEnv
-sudo  docker run --name nginx -d -p 80:80 -v /var/run/docker.sock:/tmp/docker.sock -t jwilder/nginx-proxy
-#fig 命令不用sudo， 如果sudo了没有环境变量
-export DOCKER_HOST=tcp://localhost:4243
-export FIG_PROJECT_NAME=code
-fig up -d
+
+set -e
+case "$1" in
+    install)
+        install
+        start
+    ;;
+    start)
+        start
+    ;;
+    stop)
+        stop
+    ;;
+    restart)
+        stop
+        start
+    ;;
+    rebuild)
+        stop
+        rebuild
+        start
+    ;;
+    *)
+      echo "Usage: $0      {start|stop|restart|rebuild}"
+      exit 1
+    ;;
+esac
+exit 0
