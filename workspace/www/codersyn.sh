@@ -1,6 +1,6 @@
 #!/bin/sh
 USER=username
-HOST=username.www.test.com
+HOST=username.www.env.com
 PWD=$( pwd | sed "s/\//#/g")
 ssh-add ./rsync-key
 chmod 600 ./rsync-key
