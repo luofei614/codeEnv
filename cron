@@ -1,0 +1,27 @@
+#/bin/sh
+set -e
+cd /codeEnv
+while true; do 
+    for line in `cd ./code ; find * -maxdepth 0 -type d`; do 
+        username=`echo $line | awk -F '.' '{print $1}'`
+        dir=`echo $line | awk -F '.' '{print $2}'`
+        if [ ! -z $dir ]; then
+            echo "$username-$dir"
+            #判断fig中是否存在
+            if [ -z $(cat fig.yml | grep $username$dir:) ]; then
+                  #如果不存在容器
+                  #读取镜像的fig.yml
+                  container_name=$username$dir;
+                  workdir="\/codeEnv\/code\/$username.$dir"
+                  domain="www.test.com"
+                  #替换变量
+                  fig_content=`cat ./team/www/fig.yml | sed "s/{CONTAINER_NAME}/$container_name/g" | sed "s/{WORKDIR}/$workdir/g" | sed "s/{USERNAME}/$username/g" | sed "s/{DOMAIN}/$domain/g"`
+                  #追加到fig.yml
+                  sudo sh -c  "echo '$fig_content' >> ./fig.yml" 
+                  #运行容器
+                  sudo fig run $container_name
+            fi
+        fi
+    done
+    sleep 2
+done

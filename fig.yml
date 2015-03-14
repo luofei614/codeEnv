@@ -28,4 +28,12 @@ phpmyadmin:
    - memcache
   environment:
    - VIRTUAL_HOST=phpmyadmin.env.com
-#[team-images]
+#[team-container]
+usernamewww:
+    volumes:
+    - /codeEnv/code/username.www:/app
+    links:
+    - db
+    - memcache
+    environment:
+    - VIRTUAL_HOST=username.www.test.com
