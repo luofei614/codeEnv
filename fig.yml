@@ -20,7 +20,7 @@ socketlog:
      - "1229:1229"
      - "1116:1116"
 phpmyadmin:
-  image:tutum/apache-php
+  image: tutum/apache-php
   volumes:
    - ./phpmyadmin:/app
   links:
