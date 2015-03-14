@@ -1,4 +1,5 @@
 {CONTAINER_NAME}:
+    build: ./team/www
     volumes:
     - {WORKDIR}:/app
     links:

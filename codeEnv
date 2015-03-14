@@ -43,6 +43,7 @@ install()
     #设置域名
     sudo sed -i  "s/env\.com/$DOMAIN/g" /codeEnv/fig.yml
     sudo sh -c "echo $DOMAIN > /codeEnv/domain"
+    sudo chmod +x /codeEnv/codeWatch
     echo "install success"
     echo "download file:http://code.$DOMAIN/code.zip"
 }
@@ -52,12 +53,16 @@ start()
     sudo  docker run --name nginx -d -p 80:80 -v /var/run/docker.sock:/tmp/docker.sock -t jwilder/nginx-proxy
     #fig 的镜像名称不能有大写字母，所以这里指定镜像名称前缀为code
     cd /codeEnv
+    #启动codeWatch
+    ./codeWatch &
     sudo FIG_PROJECT_NAME=code  fig up -d
 }
 
 stop()
 {
     sudo docker rm -f nginx
+    #停止codeWatch
+    kill -9 $(ps | grep "codeWatch" | awk '{ print $1 }')
     cd /codeEnv
     sudo fig stop
 }

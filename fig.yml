@@ -20,20 +20,11 @@ socketlog:
      - "1229:1229"
      - "1116:1116"
 phpmyadmin:
-  build: ./runbox
+  image:tutum/apache-php
   volumes:
    - ./phpmyadmin:/app
   links:
    - db
-   - memcache
   environment:
    - VIRTUAL_HOST=phpmyadmin.env.com
 #[team-container]
-usernamewww:
-    volumes:
-    - /codeEnv/code/username.www:/app
-    links:
-    - db
-    - memcache
-    environment:
-    - VIRTUAL_HOST=username.www.test.com
