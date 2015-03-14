@@ -1,6 +1,12 @@
 #!/bin/sh
+set -e
+DOMAIN="$2"
 install()
 {
+    if [ -z $DOMAIN]; then
+        echo "useage : codeEnv install i.yourname.com"
+        exit 1 
+    fi
     if [ ! -d /codeEnv ]; then
      if [ -z $(which git) ]; then
       echo "install git ..."
@@ -34,8 +40,10 @@ install()
        sudo wget -O /usr/local/bin/fig https://github.com/docker/fig/releases/download/1.0.1/fig-`uname -s`-`uname -m`
        sudo chmod +x /usr/local/bin/fig
     fi
+    #设置域名
+    sed -i "s/evn\.com/$DOMAIN/g" /codeEnv/fig.yml
     echo "install success"
-    echo "download file:http://code.env.com/code.zip"
+    echo "download file:http://code.$DOMAIN/code.zip"
 }
 
 start()
@@ -59,7 +67,6 @@ rebuild()
 }
 
 
-set -e
 case "$1" in
     install)
         install
