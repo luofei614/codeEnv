@@ -42,6 +42,7 @@ install()
     fi
     #设置域名
     sudo sed -i  "s/env\.com/$DOMAIN/g" /codeEnv/fig.yml
+    sudo sh -c "echo $DOMAIN > /codeEnv/domain"
     echo "install success"
     echo "download file:http://code.$DOMAIN/code.zip"
 }
