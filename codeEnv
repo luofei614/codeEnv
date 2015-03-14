@@ -41,7 +41,7 @@ install()
        sudo chmod +x /usr/local/bin/fig
     fi
     #设置域名
-    sed -i "s/evn\.com/$DOMAIN/g" /codeEnv/fig.yml
+    sudo sed -i  "s/env\.com/$DOMAIN/g" /codeEnv/fig.yml
     echo "install success"
     echo "download file:http://code.$DOMAIN/code.zip"
 }

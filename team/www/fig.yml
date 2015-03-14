@@ -1,0 +1,7 @@
+volumes:
+- {WORKDIR}:/app
+links:
+- db
+- memcache
+environment:
+- VIRTUAL_HOST={USERNAME}.www.env.com
