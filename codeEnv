@@ -55,7 +55,7 @@ start()
     #fig 的镜像名称不能有大写字母，所以这里指定镜像名称前缀为code
     cd /codeEnv
     #启动codeWatch
-    ./codeWatch &
+    ./codeWatch > /dev/null &
     sudo FIG_PROJECT_NAME=code  fig up -d
 }
 

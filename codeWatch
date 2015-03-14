@@ -1,14 +1,14 @@
 #/bin/sh
 #监控如果新增目录，自动设置docker容器
 set -e
-#cd /codeEnv
+cd /codeEnv
 while true; do 
     for line in `cd ./code ; find * -maxdepth 0 -type d`; do 
         username=`echo $line | awk -F '.' '{print $1}'`
         dir=`echo $line | awk -F '.' '{print $2}'`
         #如果dir对应一个team下的镜像
         if ([ ! -z $dir  ] && [ -d "./team/$dir" ] ); then
-            echo "$username-$dir"
+            #echo "$username-$dir"
             #判断fig中是否存在
             if [ -z $(cat fig.yml | grep $username$dir:) ]; then
                   #如果不存在容器
@@ -21,7 +21,7 @@ while true; do
                   #追加到fig.yml
                   sudo sh -c  "echo '$fig_content' >> ./fig.yml" 
                   #运行容器
-                  #sudo fig run $container_name
+                  sudo fig run $container_name
             fi
         fi
     done
