@@ -3,10 +3,11 @@ set -e
 DOMAIN="$2"
 install()
 {
-    if [ -z $DOMAIN]; then
+    if [ -z $DOMAIN ]; then
         echo "useage : codeEnv install i.yourname.com"
         exit 1 
     fi
+    exit 2;
     if [ ! -d /codeEnv ]; then
      if [ -z $(which git) ]; then
       echo "install git ..."
