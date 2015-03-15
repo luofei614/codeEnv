@@ -39,9 +39,10 @@ zhangsan, 在本地简历了 api目录，   服务器会就会自动给他在服
 	  下载地址 http://code.i.yourdomain.com/code.zip
 	解压下载的压缩包， 编辑 codersyn.sh 脚本， 修改USER变量为自己自定义的英文用户名。 比如我修改USER为luofei。  然后命令行运行 `./codersyn.sh` 
 	  此时修改www内的文件， 会自动同步到服务器。 访问服务器网站地址：luofei.www.i.yourdomain.com 
-
   以后每新来一个同事， 都给他code.zip压缩包， 配置不同的USER变量， 他就有自己的开发环境了。 比如来了个张三， USER变量设置为zhangsan ， 他的服务器访问地址是 zhangsan.www.i.yourdomain.com
+
 ##添加team镜像
+
    服务器的/codeEnv/team 目录下是我们团队的运行环境镜像，  www目录是默认的镜像。 我们可以在team目录下添加其他镜像， 比如我们现在要启动API项目，在team目录下简历 名为api的目录， 并在此目录中建立Dockerfile文件。 Dockerfile定义了我们API的开发环境需要装什么软件， 需要做什么配置， 具体Dockerfile的写法见：https://docs.docker.com/reference/builder/ 
     还需要在API目录下建立 fig.yml ,  定义启动这个容器时是的参数，如定义 volumes 虚拟目录， 定义link要连接的其他容器。  具体fig.yml写法见：http://www.fig.sh/yml.html 
     可参考www项目的fig.yml的写法。
