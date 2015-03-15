@@ -31,11 +31,15 @@ zhangsan, 在本地简历了 api目录，   服务器会就会自动给他在服
  1. 下载codeEnv脚本：
    
 `sudo wget -O /usr/local/bin/codeEnv https://raw.githubusercontent.com/luofei614/codeEnv/master/codeEnv ;sudo chmod +x /usr/local/bin/codeEnv ;`
+
 2. 安装开发环境：
+
 `codeEnv install  i.yourdomain.com`
+
 3. 绑定域名：
 上面命令指定了要绑定的域名， i.yourdomain.com，  需要把 i.yourdoamin.com 域名和 \*.yourdoamin.com 泛域名解析到当前服务。
- 4. 下载本地同步脚本
+
+4. 下载本地同步脚本
 	  下载地址 http://code.i.yourdomain.com/code.zip
 	解压下载的压缩包， 编辑 codersyn.sh 脚本， 修改USER变量为自己自定义的英文用户名。 比如我修改USER为luofei。  然后命令行运行 `./codersyn.sh` 
 	  此时修改www内的文件， 会自动同步到服务器。 访问服务器网站地址：luofei.www.i.yourdomain.com 
