@@ -63,3 +63,5 @@ zhangsan, 在本地简历了 api目录，   服务器会就会自动给他在服
    memcache, 容器名是 memcache 。
    
    大家可以在自己的team团队镜像中连接db和memcache 。
+
+   socketlog , 服务地址: i.yourdomain.com:1229
