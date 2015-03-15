@@ -21,7 +21,7 @@ while true; do
                   #追加到fig.yml
                   sudo sh -c  "echo '$fig_content' >> ./fig.yml" 
                   #运行容器
-                  sudo fig run $container_name
+                  sudo FIG_PROJECT_NAME=code fig run $container_name
             fi
         fi
     done
