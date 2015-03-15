@@ -6,4 +6,4 @@
     - db
     - memcache
     environment:
-    - VIRTUAL_HOST={USERNAME}.{DOMAIN}
+    - VIRTUAL_HOST={USERNAME}.{DIR}.{DOMAIN}

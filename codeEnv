@@ -42,6 +42,7 @@ install()
     fi
     #设置域名
     sudo sed -i  "s/env\.com/$DOMAIN/g" /codeEnv/fig.yml
+    sudo sed -i  "s/env\.com/$DOMAIN/g" /codeEnv/workspace/www/codersyn.sh
     sudo sh -c "echo $DOMAIN > /codeEnv/domain"
     sudo chmod +x /codeEnv/codeWatch
     echo "install success"
@@ -54,7 +55,7 @@ start()
     #fig 的镜像名称不能有大写字母，所以这里指定镜像名称前缀为code
     cd /codeEnv
     #启动codeWatch
-    ./codeWatch > /dev/null &
+    sudo nohup ./codeWatch > /dev/null &
     sudo FIG_PROJECT_NAME=code  fig up -d
 }
 
@@ -62,7 +63,7 @@ stop()
 {
     sudo docker rm -f nginx
     #停止codeWatch
-    kill -9 $(ps | grep "codeWatch" | awk '{ print $1 }')
+    sudo kill -9 $(ps | grep "codeWatch" | awk '{ print $1 }')
     cd /codeEnv
     sudo fig stop
 }

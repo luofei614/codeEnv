@@ -17,11 +17,11 @@ while true; do
                   workdir="\/codeEnv\/code\/$username.$dir"
                   domain=`cat ./domain`
                   #替换变量
-                  fig_content=`cat ./team/www/fig.yml | sed "s/{CONTAINER_NAME}/$container_name/g" | sed "s/{WORKDIR}/$workdir/g" | sed "s/{USERNAME}/$username/g" | sed "s/{DOMAIN}/$domain/g"`
+                  fig_content=`cat ./team/www/fig.yml | sed "s/{CONTAINER_NAME}/$container_name/g" | sed "s/{WORKDIR}/$workdir/g" | sed "s/{USERNAME}/$username/g" | sed "s/{DOMAIN}/$domain/g" | sed "s/{DIR}/$dir/g"`
                   #追加到fig.yml
-                  sudo sh -c  "echo '$fig_content' >> ./fig.yml" 
+                  sh -c  "echo '$fig_content' >> ./fig.yml" 
                   #运行容器
-                  sudo FIG_PROJECT_NAME=code fig run -d $container_name
+                  FIG_PROJECT_NAME=code fig run -d $container_name
             fi
         fi
     done
