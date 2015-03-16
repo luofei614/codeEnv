@@ -14,7 +14,7 @@ codeEnv 能解决上述所有问题。 他是一个基于docker的开发环境�
 
 举一个应用场景：
 
-假设团队现在有5个项目， 分别是  www（官网），api（接口）， weixin（微信）， shop（商城），bbs(论坛)， 这5个项目在服务器已经简历好了team镜像（如何建立team镜像，后面会说明。）
+假设团队现在有5个项目， 分别是  www（官网），api（接口）， weixin（微信）， shop（商城），bbs(论坛)， 这5个项目在服务器已经建立好了team镜像（如何建立team镜像，后面会说明。）
 
 开发服务器已经绑定了范域名 *.i.yourdomain.com.
 
@@ -22,7 +22,7 @@ codeEnv 能解决上述所有问题。 他是一个基于docker的开发环境�
 
 zhangsan， 在本地建立 www 目录，  服务器会就会自动给他在服务器上建立官网的容器的， 访问地址是  zhangsan.www.i.yourdomain.com
 
-zhangsan, 在本地简历了 api目录，   服务器会就会自动给他在服务器上建立API的容器的， 访问地址是  zhangsan.api.i.yourdomain.com
+zhangsan, 在本地建立了 api目录，   服务器会就会自动给他在服务器上建立API的容器的， 访问地址是  zhangsan.api.i.yourdomain.com
 
 主管不用给张三建立服务器的登录账户，也不能给张三配置域名。  张三不是在服务器上面编程，而是在本地编程。虽然是在本地编程，但运行环境是在服务器上面的，所有同事用的同样的运行环境，使用同一个数据库
  
@@ -50,7 +50,7 @@ zhangsan, 在本地简历了 api目录，   服务器会就会自动给他在服
 
 ## 添加team镜像
 
-   服务器的/codeEnv/team 目录下是我们团队的运行环境镜像，  www目录是默认的镜像。 我们可以在team目录下添加其他镜像， 比如我们现在要启动API项目，在team目录下简历 名为api的目录， 并在此目录中建立Dockerfile文件。 Dockerfile定义了我们API的开发环境需要装什么软件， 需要做什么配置， 具体Dockerfile的写法见：https://docs.docker.com/reference/builder/ 
+   服务器的/codeEnv/team 目录下是我们团队的运行环境镜像，  www目录是默认的镜像。 我们可以在team目录下添加其他镜像， 比如我们现在要启动API项目，在team目录下建立 名为api的目录， 并在此目录中建立Dockerfile文件。 Dockerfile定义了我们API的开发环境需要装什么软件， 需要做什么配置， 具体Dockerfile的写法见：https://docs.docker.com/reference/builder/ 
     还需要在API目录下建立 fig.yml ,  定义启动这个容器时是的参数，如定义 volumes 虚拟目录， 定义link要连接的其他容器。  具体fig.yml写法见：http://www.fig.sh/yml.html 
     可参考www项目的fig.yml的写法。
      fig.yml 可以使用变量：
