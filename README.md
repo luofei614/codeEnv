@@ -46,6 +46,8 @@ zhangsan, 在本地简历了 api目录，   服务器会就会自动给他在服
 	  此时修改www内的文件， 会自动同步到服务器。 访问服务器网站地址：luofei.www.i.yourdomain.com 
   以后每新来一个同事， 都给他code.zip压缩包， 配置不同的USER变量， 他就有自己的开发环境了。 比如来了个张三， USER变量设置为zhangsan ， 他的服务器访问地址是 zhangsan.www.i.yourdomain.com
 
+  本地环境是支持mac和linux ，本地需要装fswatch和rsync 这两个软件，这两个软件是用于代码实时同步的，  windows因为不能装fswatch和rsync，所以windows的用户暂时只能自行解决，可以用编辑器的sftp插件， 在保存的时候实时同步代码， sftp上传地址 i.yourdomain.com ,端口 222, 用户名 www-data , 密码123456。同步目录 /codeEnv/code/username.dirname
+
 ## 添加team镜像
 
    服务器的/codeEnv/team 目录下是我们团队的运行环境镜像，  www目录是默认的镜像。 我们可以在team目录下添加其他镜像， 比如我们现在要启动API项目，在team目录下简历 名为api的目录， 并在此目录中建立Dockerfile文件。 Dockerfile定义了我们API的开发环境需要装什么软件， 需要做什么配置， 具体Dockerfile的写法见：https://docs.docker.com/reference/builder/ 
