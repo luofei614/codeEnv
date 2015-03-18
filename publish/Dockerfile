@@ -1,3 +1,5 @@
+#代码发布系统
+#和coding结合，内部关联git下载代码， 然后移动带发布目录， 发布目录和外部目录相关联
 FROM ubuntu:12.04
 RUN sed -i "s/archive\.ubuntu\.com/mirrors\.163\.com/g" /etc/apt/sources.list
 RUN apt-get update && \
