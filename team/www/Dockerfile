@@ -20,6 +20,7 @@ RUN sed -i "s/variables_order.*/variables_order = \"EGPCS\"/g" /etc/php5/apache2
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 #安装phpunit
 RUN composer global require 'phpunit/phpunit=4.5.*'
+RUN ln -s /root/.composer/vendor/bin/phpunit  /usr/local/bin/phpunit
 #星期一到星期六每天运行4次单元测试
 RUN echo "0 11,14,16,18 * * 1-6 root /test.sh" > /etc/cron.d/unittest
 RUN chmod 0644  /etc/cron.d/unittest 
