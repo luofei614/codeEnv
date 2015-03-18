@@ -33,7 +33,7 @@ RUN echo "Alias /publish_api /publish_api \
 ADD publish_api /publish_api
 
 #gearman 队列
-RUN apt-get -yq  install libboost-all-dev gperf libevent1-dev libcloog-ppl0 && \
+RUN apt-get update &&  apt-get -yq  install libboost-all-dev gperf libevent1-dev libcloog-ppl0 && \
 wget https://launchpad.net/gearmand/1.2/1.1.8/+download/gearmand-1.1.8.tar.gz && \ 
 tar zxvf gearmand-1.1.8.tar.gz  && \
 cd gearmand-1.1.8/ && \
