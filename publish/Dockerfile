@@ -1,7 +1,7 @@
 #代码发布系统
 #和coding结合，内部关联git下载代码， 然后移动带发布目录， 发布目录和外部目录相关联
 FROM ubuntu:12.04
-RUN sed -i "s/archive\.ubuntu\.com/mirrors\.163\.com/g" /etc/apt/sources.list
+#RUN sed -i "s/archive\.ubuntu\.com/mirrors\.163\.com/g" /etc/apt/sources.list
 RUN apt-get update && \
     apt-get -yq install \
         curl \
@@ -19,12 +19,11 @@ RUN apt-get update && \
 RUN pecl install taint
 RUN echo "extension=taint.so\ntaint.enable=On" > /etc/php5/conf.d/taint.ini
 RUN sed -i "s/variables_order.*/variables_order = \"EGPCS\"/g" /etc/php5/apache2/php.ini
+#虚拟目录设置， 发布接口放在虚拟目录中
+#gearman 队列
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 #安装phpunit
 RUN composer global require 'phpunit/phpunit=4.5.*'
-#星期一到星期六每天运行4次单元测试
-RUN echo "0 11,14,16,18 * * 1-6 root /test.sh" > /etc/cron.d/unittest
-RUN chmod 0644  /etc/cron.d/unittest 
 
 #rewrite
 RUN sed -i "s/AllowOverride None/AllowOverride All/g" /etc/apache2/sites-available/default
