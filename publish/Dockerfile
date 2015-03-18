@@ -11,7 +11,7 @@ RUN apt-get update && \
         php5-gd \
         php5-curl \
         php-pear \
-        php5-memcache\
+        php5-memcache \
         make \
         wget \
         php-apc && \
@@ -22,13 +22,13 @@ RUN pecl install taint
 RUN echo "extension=taint.so\ntaint.enable=On" > /etc/php5/conf.d/taint.ini
 RUN sed -i "s/variables_order.*/variables_order = \"EGPCS\"/g" /etc/php5/apache2/php.ini
 #虚拟目录设置， 发布接口放在虚拟目录中
-RUN echo "Alias /publish_api /publish_api \
-   <Directory /publish_api>\
-    Options Indexes FollowSymLinks MultiViews\
-    AllowOverride None\
-    Order allow,deny\
-    allow from all\
-   </Directory>\
+RUN echo "Alias /publish_api /publish_api \n\
+   <Directory /publish_api> \n\
+    Options Indexes FollowSymLinks MultiViews\n\
+    AllowOverride None\n\
+    Order allow,deny\n\
+    allow from all\n\
+   </Directory>\n\
 " > /etc/apache2/conf.d/publish_api.conf
 ADD publish_api /publish_api
 
