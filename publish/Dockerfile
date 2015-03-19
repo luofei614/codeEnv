@@ -26,6 +26,7 @@ RUN echo "Alias /publish_api /publish_api \n\
    <Directory /publish_api> \n\
     Options Indexes FollowSymLinks MultiViews\n\
     AllowOverride None\n\
+    DirectoryIndex index.php\n\
     Order allow,deny\n\
     allow from all\n\
    </Directory>\n\
