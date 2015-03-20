@@ -43,6 +43,7 @@ make && \
 make install && \ 
 pecl install gearman
 RUN echo "extension=gearman.so" > /etc/php5/conf.d/gearman.ini 
+RUN gearmand -d
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 #安装phpunit
@@ -60,6 +61,15 @@ RUN chmod 755 /*.sh
 # Configure /app folder with sample app
 RUN mkdir -p /app && rm -fr /var/www && ln -s /app /var/www
 VOLUME ["/app"]
+
+#代码仓库
+RUN apt-get update && apt-get install -yq ca-certificates git-core ssh
+ENV HOME /root
+ADD ssh/ /root/.ssh/
+RUN chmod 600 /root/.ssh/*
+RUN ssh-keyscan -p 22 coding.net > /root/.ssh/known_hosts
+RUN git clone git@coding.net:luofei614/test.git /app
+
 
 EXPOSE 80
 WORKDIR /app

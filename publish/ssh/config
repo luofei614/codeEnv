@@ -1,0 +1,4 @@
+Host coding.net
+HostName coding.net
+Port 22
+identityfile /root/.ssh/id_rsa
