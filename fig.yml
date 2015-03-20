@@ -3,7 +3,7 @@ workspace:
   ports:
    - "222:22"
   volumes:
-   - /codeEnv/code:/code
+   - ./code:/code
   environment:
    - VIRTUAL_HOST=code.env.com
 db:
@@ -11,7 +11,7 @@ db:
   environment:
    - MARIADB_PASS=123456 
   volumes:
-   - /codeEnv/database:/var/lib/mysql
+   - ./database:/var/lib/mysql
 memcache: 
   image: memcached
 socketlog:
@@ -27,4 +27,10 @@ phpmyadmin:
    - db
   environment:
    - VIRTUAL_HOST=phpmyadmin.env.com
+publish:
+  build: ./publish/
+  volumes:
+   - ./publish_codedir:/publish_codedir
+  environment:
+   - VIRTUAL_HOST=publish.env.com
 #[team-container]
