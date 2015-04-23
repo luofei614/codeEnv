@@ -76,7 +76,7 @@ function githook_coding($job)
                  if('success' == $ret_json['status'])
                  {
                     //发布代码
-                    shell_exec('cp -r /app /publish_codedir'); 
+                    shell_exec('cp -r /app/* /publish_codedir'); 
                     send_message($owner_mail,'代码上线,项目：'.$project_name,'项目'.$project_name.'代码申请上线');
                     send_message($to_mail,'代码上线审核','项目：'.$project_name.'申请上线，请联系'.$owner_name.'('.$owner_mail.')审核代码'); 
                  }
