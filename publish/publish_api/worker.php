@@ -17,6 +17,7 @@ function githook_coding($job)
        //获得最后一条注释
        $message = $json['commits'][0]['short_message'];
        $to_mail = $json['commits'][0]['committer']['email'];
+       //TODO  ownner 不存在
        $owner_mail = $json['owner']['email'];
        $owner_name = $json['owner']['name'];
        $project_name = $json['description'].'('.$json['name'].')';
