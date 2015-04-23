@@ -77,12 +77,12 @@ function githook_coding($job)
                  {
                     //发布代码
                     shell_exec('cp -r /app/* /publish_codedir'); 
-                    send_message($owner_mail,'代码上线,项目：'.$project_name,'项目'.$project_name.'代码申请上线');
+                  //send_message($owner_mail,'代码上线,项目：'.$project_name,'项目'.$project_name.'代码申请上线');
                     send_message($to_mail,'代码上线审核','项目：'.$project_name.'申请上线，请联系'.$owner_name.'('.$owner_mail.')审核代码'); 
                  }
                  else
                  {
-                    send_message($to_mail,'单元测试错误',$ret_json['result']); 
+                    send_message($to_mail,'代码上线时单元测试错误,项目:'.$project_name,$ret_json['result']);
                  }
             }
             if('master'!=$branch)
@@ -96,5 +96,6 @@ function githook_coding($job)
 
 function send_message($to,$title,$content)
 {
-   echo $title.'>>'.$content.PHP_EOL;
+    //TODO 信息发到slack
+    echo $title.'>>'.$content.PHP_EOL;
 }
