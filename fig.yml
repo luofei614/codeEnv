@@ -31,6 +31,9 @@ publish:
   build: ./publish/
   volumes:
    - ./publish_codedir:/publish_codedir
+  links:
+   - db
+   - memcache
   environment:
    - VIRTUAL_HOST=publish.env.com
 #[team-container]

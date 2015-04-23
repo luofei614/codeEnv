@@ -68,7 +68,8 @@ ENV HOME /root
 ADD ssh/ /root/.ssh/
 RUN chmod 600 /root/.ssh/*
 RUN ssh-keyscan -p 22 coding.net > /root/.ssh/known_hosts
-RUN git clone git@coding.net:luofei614/test.git /app
+#在容器内自己git clone
+#RUN git clone git@coding.net:luofei614/test.git /app
 
 
 
