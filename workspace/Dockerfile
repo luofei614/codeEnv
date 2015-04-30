@@ -14,6 +14,7 @@ ADD  www /app
 ADD  run.sh /run.sh
 RUN  chmod +x /run.sh
 RUN  cd /app && ssh-keygen -N "" -t dsa -b 1024 -f rsync-key && cp rsync-key.pub /var/www/.ssh/authorized_keys  && zip -r code.zip *
+RUN  locale-gen en_US.UTF-8
 EXPOSE 22
 VOLUME ["/code"]
 CMD   /run.sh 
