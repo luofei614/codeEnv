@@ -70,6 +70,8 @@ RUN chmod 600 /root/.ssh/*
 RUN ssh-keyscan -p 22 coding.net > /root/.ssh/known_hosts
 #在容器内自己git clone
 #RUN git clone git@coding.net:luofei614/test.git /app
+#解决svn不能提交中文文件的问题
+RUN locale-gen zh_CN.UTF-8
 
 
 
